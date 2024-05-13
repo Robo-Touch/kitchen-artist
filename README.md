@@ -1,3 +1,6 @@
+# To Run Locally
+```php -S localhost:8080```
+
 # Academic Project Page Template
 This is an academic paper project page template.
 
