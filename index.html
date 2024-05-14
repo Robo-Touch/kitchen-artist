@@ -120,7 +120,16 @@
         <h2 class="title is-3">Abstract</h2>
         <div class="content has-text-justified">
           <p>
-            Manipulating liquid is widely required for many tasks, especially in cooking. A common way to address this is extruding viscous liquid from a squeeze bottle. In this work, our goal is to create a sauce plating robot, which requires precise control of the thickness of squeezed liquids on a surface. Different liquids demand different manipulation policies. We command the robot to tilt the container and monitor the liquid response using a force sensor to identify liquid properties. Based on the liquid properties, we predict the liquid behavior with fixed squeezing motions in a data-driven way and calculate the required drawing speed for the desired stroke size. This open-loop system works effectively even without sensor feedback. Our experiments demonstrate accurate stroke size control across different liquids and fill levels. We show that understanding liquid properties can facilitate effective liquid manipulation. More importantly, our dish garnishing robot has a wide range of applications and holds significant commercialization potential.          </p>
+            Manipulating liquid is widely required for many tasks, especially in cooking. 
+            A common way to address this is extruding viscous liquid from a squeeze bottle. 
+            In this work, our goal is to create a sauce plating robot, which requires precise control of the thickness of squeezed liquids on a surface. 
+            Different liquids demand different manipulation policies. We command the robot to tilt the container and monitor the liquid response using a force sensor to identify liquid properties. 
+            Based on the liquid properties, we predict the liquid behavior with fixed squeezing motions in a data-driven way and calculate the required drawing speed for the desired stroke size. 
+            This open-loop system works effectively even without sensor feedback. 
+            Our experiments demonstrate accurate stroke size control across different liquids and fill levels. 
+            We show that understanding liquid properties can facilitate effective liquid manipulation. 
+            More importantly, our dish garnishing robot has a wide range of applications and holds significant commercialization potential.
+          </p>
         </div>
       </div>
     </div>
@@ -129,11 +138,108 @@
 <!-- End paper abstract -->
 
 
-<!-- Video carousel -->
+<!-- method-->
 <section class="hero is-small">
   <div class="hero-body">
     <div class="container is-max-desktop">
-      <h2 class="title is-3">Stroke Thickness Control Using Our Method vs. Baselines</h2>
+      <h2 class="title is-3">Method</h2>
+      <h2 class="title is-4">Stroke Width Control Pipeline</h2>
+      <div class="content has-text-justified">
+        <p>
+          We propose a two-phase approach to control the thickness and volume-per-length of the dispensed liquid stream from a squeezing bottle. 
+          In the exploration phase, we perturb the bottle to gather liquid property information. 
+          This information allows us to predict how the flow rate changes over time with our consistent squeezing motion and how the liquid forms strokes. 
+          In the dispensing phase, we utilize these predictions to guide the drawing speed, achieving control over stream thickness and volume-per-length.
+        </p>
+      </div>
+      <img src="static/images/Fig2.png" />
+    </div>
+  </div>
+</section>
+
+<section class="hero is-small">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <h2 class="title is-4">Training and Testing Liquids</h2>
+      <div class="content has-text-justified">
+        <p>
+          We collected data with 20 liquids to train the MLPs and tested our approach on 5 other liquids.
+        </p>
+      </div>
+      <img src="static/images/liquids.png" />
+    </div>
+  </div>
+</section>
+
+<section class="hero is-small">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <h2 class="title is-4">Predicted Liquid Property Curves For Three Testing Liquids</h2>
+      <div class="content has-text-justified">
+        <p>
+          We collected data with 20 liquids to train the MLPs and tested our approach on 5 other liquids. 
+          The liquids cover a wide range of viscosity, ranging from 1cP (like water) to 70,000 cP (like toothpaste).
+        </p>
+      </div>
+      <img src="static/images/curves.png" />
+      <br>
+      <div class="content has-text-justified">
+        <p>
+          The table below shows the Flow Rate Curve (FC) and Stacking Pattern Curve (SC) mean prediction error of testing liquids in various fill levels across different approaches.
+        </p>
+      </div>
+      <div style="text-align: center;">
+        <img width="500" src="static/images/prediction_error.png">
+     </div>
+    </div>
+  </div>
+</section>
+<!-- End method -->
+
+
+<!-- experiments-->
+<section class="hero is-small is-light">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <h2 class="title is-3">Experiments</h2>
+      <h2 class="title is-4">Robot Setup</h2>
+      <div class="content has-text-justified">
+        <p>
+          We use a 6DOF robot arm (UR5e by Universal Robotics) equipped with a 2-fingered gripper (WSG50 by Weiss Robotics) for our experiments.
+          A 6-axis F/T sensor (NRS-6050-D80 by Nordbo Robotics) with 1000 Hz sampling rate is attached to the robot wrist.
+          To ensure the stability of the bottle while squeezing, a specially designed bottle holder is attached to the robot.
+          All the liquids used in the experiments are contained within a 16 oz squeezing bottle.
+        </p>
+      </div>
+      <div style="text-align: center;">
+        <img width="700" src="static/images/setup.png">
+     </div>
+    </div>
+  </div>
+</section>
+
+<section class="hero is-small is-light">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <h2 class="title is-4">Stroke Thickness Control Using Our Method vs. Baselines</h2>
+      <div class="content has-text-justified">
+        <p>
+          We task the robot with squeezing streams of 10cm in length at various fill levels of the testing liquids to achieve thickness of 5, 10, 15, and 20 mm. 
+          <!-- We assess accuracy by quantifying the deviation between the desired and actual thickness.  -->
+          <!-- Additionally, we calculate thickness consistency by measuring the standard deviation along the line. -->
+          Our approach demonstrates comparable performance in both thickness accuracy and consistency control when compared to PP, outperforming other baseline methods.
+        </p>
+      </div>
+      <div style="text-align: center;">
+        <img src="static/images/line_stats.png">
+     </div>
+    </div>
+  </div>
+</section>
+
+<section class="hero is-small is-light">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
       <div id="results-carousel" class="carousel results-carousel">
         <div class="item item-video1">
           <video poster="" id="video1" controls muted loop height="100%">
@@ -157,16 +263,15 @@
     </div>
   </div>
 </section>
-<!-- End video carousel -->
+<!-- End experiments -->
 
 
-
-<!-- Video carousel -->
-<section class="hero is-small is-light">
+<!-- demos -->
+<section class="hero is-small">
   <div class="hero-body">
     <div class="container is-max-desktop">
-      <h2 class="title is-3">Demonstration 1</h2>
-      <h2 class="title is-4">Replicate Image With Two Unseen Sauces</h2>
+      <h2 class="title is-3">Additional Experiments</h2>
+      <h2 class="title is-4">Demonstration 1: <br>Replicate Image With Two Unseen Sauces</h2>
       <div id="results-carousel" class="carousel results-carousel" data-bs-interval="false">
         <div class="item item-video1">
           <video poster="" id="video1" autoplay muted loop height="100%">
@@ -190,15 +295,11 @@
     </div>
   </div>
 </section>
-<!-- End video carousel -->
 
-
-<!-- Video carousel -->
 <section class="hero is-small">
   <div class="hero-body">
     <div class="container is-max-desktop">
-      <h2 class="title is-3">Demonstration 2</h2>
-      <h2 class="title is-4"> Replicate Human Drawing Containing Uneven Stroke Thickness</h2>
+      <h2 class="title is-4">Demonstration 2: <br>Replicate Human Drawing Containing Uneven Stroke Thickness</h2>
       <div id="results-carousel" class="carousel results-carousel">
         <div class="item item-video1">
           <video poster="" id="video1" controls muted loop height="100%">
@@ -222,7 +323,7 @@
     </div>
   </div>
 </section>
-<!-- End video carousel -->
+<!-- End demos -->
 
 
 <!-- PDF -->
